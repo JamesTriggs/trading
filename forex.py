@@ -2,6 +2,7 @@
 import sys
 import psycopg2
 import datetime
+import threading
 from forex_python.converter import CurrencyRates
 from config import config
 
@@ -9,11 +10,18 @@ curr_list = 'currencies.txt'
 
 def main():
     """Main entry point for the script."""
+    runLoop()
+    # t = threading.Timer
+    # t.daemon = True
+    # t.start()
+    # t(5.0, runLoop)
+    # print('loop passed')
+
+def runLoop():
     conn = connect()
     currencies = parseFile(curr_list)
     currency_rate = getCurrencyPairPrice(currencies)
     commitPricesToDb(currency_rate, conn)
-    pass
 
 def parseFile(curr_list):
     """Open text file of currencies and compile into list object""" 
@@ -23,13 +31,6 @@ def parseFile(curr_list):
 
 def connect():
     """Connect to Postgresql database"""
-    #try:
-    #    conn = psycopg2.connect("dbname='forex' user='postgres' host='localhost' password='root'")
-    #except:
-    #    print("I am unable to connect to the database")
-
-    #return conn
-
     conn = None
     try:
         # read connection parameters
