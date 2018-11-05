@@ -21,7 +21,7 @@ def runLoop():
     conn = connect()
     currencies = parseFile(curr_list)
     currency_rate = getCurrencyPairPrice(currencies)
-    commitPricesToDb(currency_rate, conn)
+    commitPricesToDb(currency_rate, conn, curr_list)
 
 def parseFile(curr_list):
     """Open text file of currencies and compile into list object""" 
@@ -56,12 +56,12 @@ def getCurrencyPairPrice(currencies):
 
     return currency_rate
 
-def commitPricesToDb(currency_rate, conn):
+def commitPricesToDb(currency_rate, conn, curr_list):
     """Take list of currency pair prices and commit to Db"""
     cur = conn.cursor()
     for currency in currency_rate:
         #try:
-        statement = ("""INSERT INTO forex.prices (currency1, currency2, date, price) VALUES ('{}', '{}', '{}', '{}')""".format(currency[0], currency[1], currency[2], currency[3]))
+        statement = ("""INSERT INTO forex.{} (date_taken, rate) VALUES ('{}', '{}')""".format(currency[1], currency[2], currency[3]))
         print(statement)
         cur.execute(statement)
         #except:
