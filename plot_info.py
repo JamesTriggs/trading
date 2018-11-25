@@ -8,6 +8,14 @@ import pandas as pd
 import pandas_datareader.data as web
 from parse_file import parseFile
 
+
+#set style of plots
+style.use('ggplot')
+
+#read from csv
+#df = pd.read_csv('tsla.csv', parse_dates = True, index_col = 0)
+# print(df[['Open', 'High']].head())
+
 #simple chart for adj close
 #df['Adj Close'].plot()
 #plt.show()
