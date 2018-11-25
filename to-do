@@ -1,0 +1,5 @@
+need to work on consuming ftse 100 data now that it's in csv format
+
+the plot class needs splitting into classes so that it's callable from somewhere else
+
+web wise - ready to be hooked to real data once that is dones
