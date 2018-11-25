@@ -7,9 +7,10 @@ stock_list = 'ftse100.txt'
 stocks = parseFile(stock_list)
 
 #data gatherer
-for stock in stocks:
-    n = 100
-    start = dt.datetime.now() - timedelta(days=n)
-    end = dt.datetime.now()
-    df = web.DataReader('{}'.format(stock), 'yahoo', start, end)
-    df.to_csv('stocks/{}.csv'.format(stock))
+def gatherData():
+    for stock in stocks:
+        n = 100
+        start = dt.datetime.now() - timedelta(days=n)
+        end = dt.datetime.now()
+        df = web.DataReader('{}'.format(stock), 'yahoo', start, end)
+        df.to_csv('stocks/{}.csv'.format(stock))
