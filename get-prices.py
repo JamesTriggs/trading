@@ -1,10 +1,14 @@
-from datetime import timedelta, datetime as dt
+from datetime import timedelta
+import datetime as dt
 import pandas_datareader.data as web
 from parse_file import parseFile
 
 #get list of stocks from file
 stock_list = 'ftse100.txt'
 stocks = parseFile(stock_list)
+
+def main():
+    gatherData()
 
 #data gatherer
 def gatherData():
@@ -14,3 +18,6 @@ def gatherData():
         end = dt.datetime.now()
         df = web.DataReader('{}'.format(stock), 'yahoo', start, end)
         df.to_csv('stocks/{}.csv'.format(stock))
+
+if __name__ == '__main__':
+    main()
