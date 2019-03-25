@@ -3,3 +3,9 @@ need to work on consuming ftse 100 data now that it's in csv format
 the plot class needs splitting into classes so that it's callable from somewhere else
 
 web wise - ready to be hooked to real data once that is dones
+
+fixing the ftse100 price grabber:
+from pandas_datareader.quandl import QuandlReader 
+
+data = QuandlReader("WIKI/{}".fromat(ticker), start=START, end=END) 
+df = data.read()
