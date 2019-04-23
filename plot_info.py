@@ -13,16 +13,17 @@ stocks = os.listdir("stocks")
 
 for stock in stocks:
     # set style of plots
+    print(stock)
     style.use('ggplot')
 
     # Read from CSV
     # Why is it saying file 'b' cannot be found?
-    df = pd.read_csv('{}'.format(stock), parse_dates = True, index_col = 0)
+    df = pd.read_csv('stocks/{}'.format(stock), parse_dates = True, index_col = 0)
     print(df[['Open', 'High']].head())
 
     # simple chart for adj close
-    df['Adj Close'].plot()
-    plt.show()
+    #df['Adj Close'].plot()
+    #plt.show()
 
     # 100 day moving average
     df['100ma'] = df['Adj Close'].rolling(window=100, min_periods=0).mean()
